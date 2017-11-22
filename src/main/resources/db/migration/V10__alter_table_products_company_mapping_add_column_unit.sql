@@ -1,0 +1,1 @@
+ALTER TABLE product_company_mapping add COLUMN unit VARCHAR not null;

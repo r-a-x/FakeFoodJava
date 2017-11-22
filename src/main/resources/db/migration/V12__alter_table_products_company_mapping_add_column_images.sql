@@ -1,0 +1,1 @@
+alter table product_company_mapping add COLUMN image text ;

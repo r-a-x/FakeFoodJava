@@ -1,0 +1,1 @@
+alter TABLE products add COLUMN company_id bigserial;
