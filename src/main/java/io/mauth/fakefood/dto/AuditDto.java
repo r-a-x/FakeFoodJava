@@ -1,5 +1,7 @@
 package io.mauth.fakefood.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.mauth.fakefood.enums.FoodType;
 import io.mauth.fakefood.enums.PurchasePlaceEnum;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
@@ -19,11 +21,15 @@ public class AuditDto implements Serializable{
     private RequestStatus status;
     private String name;
     private Long companyId;
+    private String company;
     private String size;
     private String flavour;
     private PurchasePlaceEnum purchasePlaceEnum;
     private String placeOfPurchase;
     private String lotNumber;
+    private FoodType foodType;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date expirationDate;
     private String barCode;
     private String  frontCanisterImage;
@@ -33,148 +39,164 @@ public class AuditDto implements Serializable{
     public AuditDto() {
     }
 
-    public AuditDto(Long id) {
-        this.id = id;
-        this.dbId = id+1;
-        this.status=RequestStatus.FAKE;
-        this.name="Yo";
-        this.companyId =23L;
-        this.size="fuck YOU";
-        this.flavour="ASS HOEL";
-        this.purchasePlaceEnum=PurchasePlaceEnum.OFFLINE;
-        this.placeOfPurchase="Indiranagar";
-        this.lotNumber="skfhkdsa34324";
-        this.expirationDate = new Date();
-        this.barCode = "FDSAFDSAR#WQ%RWQAEDS";
-
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public AuditDto setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public FoodType getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
     }
 
     public String getAndroidId() {
         return androidId;
     }
 
-    public void setAndroidId(String androidId) {
+    public AuditDto setAndroidId(String androidId) {
         this.androidId = androidId;
+        return this;
     }
 
     public Long getDbId() {
         return dbId;
     }
 
-    public void setDbId(Long dbId) {
+    public AuditDto setDbId(Long dbId) {
         this.dbId = dbId;
+        return this;
     }
 
     public RequestStatus getStatus() {
         return status;
     }
 
-    public void setStatus(RequestStatus status) {
+    public AuditDto setStatus(RequestStatus status) {
         this.status = status;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public AuditDto setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public AuditDto setCompanyId(Long companyId) {
         this.companyId = companyId;
+        return this;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public AuditDto setSize(String size) {
         this.size = size;
+        return this;
     }
 
     public String getFlavour() {
         return flavour;
     }
 
-    public void setFlavour(String flavour) {
+    public AuditDto setFlavour(String flavour) {
         this.flavour = flavour;
+        return this;
     }
 
     public PurchasePlaceEnum getPurchasePlaceEnum() {
         return purchasePlaceEnum;
     }
 
-    public void setPurchasePlaceEnum(PurchasePlaceEnum purchasePlaceEnum) {
+    public AuditDto setPurchasePlaceEnum(PurchasePlaceEnum purchasePlaceEnum) {
         this.purchasePlaceEnum = purchasePlaceEnum;
+        return this;
     }
 
     public String getPlaceOfPurchase() {
         return placeOfPurchase;
     }
 
-    public void setPlaceOfPurchase(String placeOfPurchase) {
+    public AuditDto setPlaceOfPurchase(String placeOfPurchase) {
         this.placeOfPurchase = placeOfPurchase;
+        return this;
     }
 
     public String getLotNumber() {
         return lotNumber;
     }
 
-    public void setLotNumber(String lotNumber) {
+    public AuditDto setLotNumber(String lotNumber) {
         this.lotNumber = lotNumber;
+        return this;
     }
 
     public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public AuditDto setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+        return this;
     }
 
     public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCode(String barCode) {
+    public AuditDto setBarCode(String barCode) {
         this.barCode = barCode;
+        return this;
     }
 
     public String getFrontCanisterImage() {
         return frontCanisterImage;
     }
 
-    public void setFrontCanisterImage(String frontCanisterImage) {
+    public AuditDto setFrontCanisterImage(String frontCanisterImage) {
         this.frontCanisterImage = frontCanisterImage;
+        return this;
     }
 
     public String getBackCanisterImage() {
         return backCanisterImage;
     }
 
-    public void setBackCanisterImage(String backCanisterImage) {
+    public AuditDto setBackCanisterImage(String backCanisterImage) {
         this.backCanisterImage = backCanisterImage;
+        return this;
     }
 
     public String getLogoImage() {
         return logoImage;
     }
 
-    public void setLogoImage(String logoImage) {
+    public AuditDto setLogoImage(String logoImage) {
         this.logoImage = logoImage;
+        return this;
     }
 
     public Audit toAudit(){

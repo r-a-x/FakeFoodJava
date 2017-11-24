@@ -1,9 +1,9 @@
 package io.mauth.fakefood.model;
 
+import io.mauth.fakefood.dto.AuditDto;
 import io.mauth.fakefood.enums.PurchasePlaceEnum;
 import io.mauth.fakefood.enums.RequestStatus;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -54,7 +54,7 @@ public class Audit implements Serializable{
 
 // 2017-10-04 12:12:00
     @Column(name = "expiration_date")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
     private Date expirationDate;
 
     @Column(name = "barcode")
@@ -207,5 +207,22 @@ public class Audit implements Serializable{
 
     public void setLogoImage(String logoImage) {
         this.logoImage = logoImage;
+    }
+
+    public AuditDto toAuditDto(){
+        return new AuditDto()
+                .setStatus(this.getStatus())
+                .setAndroidId(this.getAndroidId())
+                .setFlavour(this.getFlavour())
+                .setBarCode(this.getBarCode())
+                .setExpirationDate(this.getExpirationDate())
+                .setId(this.getId())
+                .setFrontCanisterImage(this.getFrontCanisterImage())
+                .setCompanyId(this.getCompanyId())
+                .setLotNumber(this.getLotNumber())
+                .setName(this.getName())
+                .setPlaceOfPurchase(this.getPlaceOfPurchase())
+                .setSize(this.getSize());
+
     }
 }

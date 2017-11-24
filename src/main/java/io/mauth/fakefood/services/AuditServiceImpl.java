@@ -1,6 +1,8 @@
 package io.mauth.fakefood.services;
 
 import io.mauth.fakefood.dto.AuditDto;
+import io.mauth.fakefood.enums.RequestStatus;
+import io.mauth.fakefood.model.Audit;
 import io.mauth.fakefood.repo.AuditRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,19 +23,24 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public List<AuditDto> getAudit(String androidId) {
 
-        List < AuditDto > auditDtos  = new ArrayList<>();
-        auditDtos.add(new AuditDto(1L));
-        auditDtos.add(new AuditDto(2L));
-        auditDtos.add(new AuditDto(3L));
-        auditDtos.add(new AuditDto(4L));
+        List < Audit > audits =  auditRepo.findByAndroidId(androidId);
+
+        List<AuditDto > auditDtos = new ArrayList<>();
+
+        for (int i=0;i<audits.size();i++){
+            Audit audit = audits.get(i);
+            auditDtos.add( audit.toAuditDto() );
+        }
+
         return auditDtos;
 
     }
 
     @Override
     public AuditDto createAudit(AuditDto auditDto) {
-
-        auditRepo.save(auditDto.toAudit());
+        Audit audit = auditDto.toAudit();
+        audit.setStatus(RequestStatus.PENDING);
+        auditRepo.save(audit);
         return auditDto;
     }
 

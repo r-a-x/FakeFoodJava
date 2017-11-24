@@ -1,4 +1,4 @@
-create table companyId (
+create table company(
   id bigserial not null primary key,
   name text not null,
   email VARCHAR (128) not NULL,
