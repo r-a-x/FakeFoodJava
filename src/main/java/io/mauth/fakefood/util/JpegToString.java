@@ -15,7 +15,6 @@ import java.util.Date;
  * Created by rahulb on 19/11/17.
  */
 
-// Reading the file and converting to the image
 
 public class JpegToString {
 
@@ -45,8 +44,8 @@ public class JpegToString {
         return new String( base64);
     }
 
-    public static void main(String args[]){
-        String name = "/home/rahulb/FakeFood/src/main/resources/images/back.jpg";
+//    public static void main(String args[]){
+//        String name = "/home/rahulb/FakeFood/src/main/resources/images/back.jpg";
 //        try {
 ////            System.out.print(   byteToBase64(  extractBytes2( name) ) );
 //        } catch (IOException e) {
@@ -54,8 +53,8 @@ public class JpegToString {
 //        }
 
 
-        toGson(new DateDto(new Date()),DateDto.class);
-    }
+//        toGson(new DateDto(new Date()),DateDto.class);
+//    }
 
     public static String toGson(Object ob, Class cl){
         Gson gson = new Gson();

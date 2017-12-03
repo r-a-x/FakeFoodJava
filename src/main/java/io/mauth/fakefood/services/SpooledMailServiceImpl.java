@@ -3,9 +3,11 @@ package io.mauth.fakefood.services;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
 import io.mauth.fakefood.model.Company;
+import io.mauth.fakefood.model.Flavours;
 import io.mauth.fakefood.repo.AuditRepo;
 import io.mauth.fakefood.repo.CompanyRepo;
 import io.mauth.fakefood.repo.FileRepo;
+import io.mauth.fakefood.repo.FlavourRepo;
 import io.mauth.fakefood.util.Constants;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.velocity.app.VelocityEngine;
@@ -36,6 +38,9 @@ public class SpooledMailServiceImpl implements SpooledMailService {
     @Autowired
     private FileRepo fileRepo;
 
+    @Autowired
+    private FlavourRepo flavourRepo;
+
     @Override
     public List<Audit> getUnsentMails() {
         return auditRepo.findByStatus(RequestStatus.PENDING);
@@ -65,7 +70,8 @@ public class SpooledMailServiceImpl implements SpooledMailService {
             params.put("name",audit.getName());
             params.put("company",company.getName());
             params.put("size",audit.getSize());
-            params.put("flavour",audit.getFlavour());
+            Flavours flavours = flavourRepo.findById( Long.valueOf(audit.getFlavour()));
+            params.put("flavour",flavours.getFlavour() );
             params.put("placeOfPurchase",audit.getPlaceOfPurchase());
             params.put("lotNumber",audit.getLotNumber());
             params.put("expirationCode",audit.getExpirationDate().toString());

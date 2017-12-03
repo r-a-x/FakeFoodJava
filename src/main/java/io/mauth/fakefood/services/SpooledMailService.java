@@ -10,6 +10,6 @@ public interface SpooledMailService {
     List<Audit> getUnsentMails();
 
     List<Audit> getFailedMails();
-//    List<SpooledMail> getUnsentAndFailedMails();
+
     void sendUnsentMails();
 }

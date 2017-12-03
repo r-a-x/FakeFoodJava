@@ -21,4 +21,19 @@ public class Flavours  {
     @Column(name ="flavour")
     private String flavour;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFlavour() {
+        return flavour;
+    }
+
+    public void setFlavour(String flavour) {
+        this.flavour = flavour;
+    }
 }
