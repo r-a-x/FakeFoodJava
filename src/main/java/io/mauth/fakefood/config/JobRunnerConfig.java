@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 /**
  * Created by rahulb on 2/12/17.
  */
-@ConditionalOnExpression("'${enable.scheduling}'=='true'")
 @Component
+@ConditionalOnExpression("'${enable.scheduling}'=='true'")
 public class JobRunnerConfig {
 
     @Autowired

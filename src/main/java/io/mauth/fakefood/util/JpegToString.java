@@ -1,10 +1,7 @@
 package io.mauth.fakefood.util;
 
 import com.google.gson.Gson;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,22 +17,7 @@ public class JpegToString {
 
     public static byte[] extractBytes2(String ImageName) throws IOException {
 
-        File imgPath = new File(ImageName);
-        BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-        ByteOutputStream bos = null;
-        try {
-            bos = new ByteOutputStream();
-            ImageIO.write(bufferedImage, "jpg", bos);
-        } finally {
-            try {
-                bos.close();
-            } catch (Exception e) {
-            }
-        }
-
-        return bos == null ? null : bos.getBytes();
-
+    return null;
     }
 
     public static String byteToBase64(byte [] bytes){
