@@ -20,6 +20,9 @@ public class AuditServiceImpl implements AuditService {
     @Autowired
     private AuditRepo auditRepo;
 
+    @Autowired
+    private SpooledMailService spooledMailService;
+
     @Override
     public List<AuditDto> getAudit(String androidId) {
 
@@ -38,9 +41,15 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public AuditDto createAudit(AuditDto auditDto) {
+
         Audit audit = auditDto.toAudit();
         audit.setStatus(RequestStatus.PENDING);
         auditRepo.save(audit);
+
+
+
+        spooledMailService.sendUnsentMails();
+
         return auditDto;
     }
 

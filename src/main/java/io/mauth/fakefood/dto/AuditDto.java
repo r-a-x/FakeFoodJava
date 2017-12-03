@@ -32,9 +32,9 @@ public class AuditDto implements Serializable{
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date expirationDate;
     private String barCode;
-    private String  frontCanisterImage;
-    private String backCanisterImage;
-    private String logoImage;
+    private String frontCanisterImageName;
+    private String backCanisterImageName;
+    private String logoImageName;
 
     public AuditDto() {
     }
@@ -172,30 +172,30 @@ public class AuditDto implements Serializable{
         return this;
     }
 
-    public String getFrontCanisterImage() {
-        return frontCanisterImage;
+    public String getFrontCanisterImageName() {
+        return frontCanisterImageName;
     }
 
-    public AuditDto setFrontCanisterImage(String frontCanisterImage) {
-        this.frontCanisterImage = frontCanisterImage;
+    public AuditDto setFrontCanisterImageName(String frontCanisterImageName) {
+        this.frontCanisterImageName = frontCanisterImageName;
         return this;
     }
 
-    public String getBackCanisterImage() {
-        return backCanisterImage;
+    public String getBackCanisterImageName() {
+        return backCanisterImageName;
     }
 
-    public AuditDto setBackCanisterImage(String backCanisterImage) {
-        this.backCanisterImage = backCanisterImage;
+    public AuditDto setBackCanisterImageName(String backCanisterImageName) {
+        this.backCanisterImageName = backCanisterImageName;
         return this;
     }
 
-    public String getLogoImage() {
-        return logoImage;
+    public String getLogoImageName() {
+        return logoImageName;
     }
 
-    public AuditDto setLogoImage(String logoImage) {
-        this.logoImage = logoImage;
+    public AuditDto setLogoImageName(String logoImageName) {
+        this.logoImageName = logoImageName;
         return this;
     }
 
@@ -211,8 +211,8 @@ public class AuditDto implements Serializable{
                 this.lotNumber,
                 this.expirationDate,
                 this.barCode,
-                this.frontCanisterImage,
-                this.backCanisterImage,
-                this.logoImage);
+                this.frontCanisterImageName,
+                this.backCanisterImageName,
+                this.logoImageName);
     }
 }

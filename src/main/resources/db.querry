@@ -12,7 +12,7 @@ insert into product_flavours_mapping (flavour,product_id,created_on,modified_on)
 insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Mocha Cappuccino',1,now(),now());
 insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Cinnamon Graham Cracker',1,now(),now());
 
-insert into companyId (name,email,created_on,modified_on ) values ( 'Optimum Nutrition (ON)','Consumer@optimumnutrition.com',now(),now());
+insert into company (name,email,created_on,modified_on ) values ( 'Optimum Nutrition (ON)','Consumer@optimumnutrition.com',now(),now());
 
 
 

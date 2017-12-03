@@ -61,18 +61,18 @@ public class Audit implements Serializable{
     private String barCode;
 
     @Column(name ="front_canister_image")
-    private String frontCanisterImage;
+    private String frontCanisterImageName;
 
     @Column(name = "back_canister_image")
-    private String backCanisterImage;
+    private String backCanisterImageName;
 
     @Column(name = "logo_image")
-    private String logoImage;
+    private String logoImageName;
 
     public Audit() {
     }
 
-    public Audit(String androidId, RequestStatus status, String name, Long companyId, String size, String flavour, PurchasePlaceEnum purchasePlaceEnum, String placeOfPurchase, String lotNumber, Date expirationDate, String barCode, String frontCanisterImage, String backCanisterImage, String logoImage) {
+    public Audit(String androidId, RequestStatus status, String name, Long companyId, String size, String flavour, PurchasePlaceEnum purchasePlaceEnum, String placeOfPurchase, String lotNumber, Date expirationDate, String barCode, String frontCanisterImageName, String backCanisterImageName, String logoImageName) {
         this.androidId = androidId;
         this.status = status;
         this.name = name;
@@ -84,9 +84,9 @@ public class Audit implements Serializable{
         this.lotNumber = lotNumber;
         this.expirationDate = expirationDate;
         this.barCode = barCode;
-        this.frontCanisterImage = frontCanisterImage;
-        this.backCanisterImage = backCanisterImage;
-        this.logoImage = logoImage;
+        this.frontCanisterImageName = frontCanisterImageName;
+        this.backCanisterImageName = backCanisterImageName;
+        this.logoImageName = logoImageName;
     }
 
     public Long getId() {
@@ -185,28 +185,28 @@ public class Audit implements Serializable{
         this.barCode = barCode;
     }
 
-    public String getFrontCanisterImage() {
-        return frontCanisterImage;
+    public String getFrontCanisterImageName() {
+        return frontCanisterImageName;
     }
 
-    public void setFrontCanisterImage(String frontCanisterImage) {
-        this.frontCanisterImage = frontCanisterImage;
+    public void setFrontCanisterImageName(String frontCanisterImageName) {
+        this.frontCanisterImageName = frontCanisterImageName;
     }
 
-    public String getBackCanisterImage() {
-        return backCanisterImage;
+    public String getBackCanisterImageName() {
+        return backCanisterImageName;
     }
 
-    public void setBackCanisterImage(String backCanisterImage) {
-        this.backCanisterImage = backCanisterImage;
+    public void setBackCanisterImageName(String backCanisterImageName) {
+        this.backCanisterImageName = backCanisterImageName;
     }
 
-    public String getLogoImage() {
-        return logoImage;
+    public String getLogoImageName() {
+        return logoImageName;
     }
 
-    public void setLogoImage(String logoImage) {
-        this.logoImage = logoImage;
+    public void setLogoImageName(String logoImageName) {
+        this.logoImageName = logoImageName;
     }
 
     public AuditDto toAuditDto(){
@@ -217,7 +217,7 @@ public class Audit implements Serializable{
                 .setBarCode(this.getBarCode())
                 .setExpirationDate(this.getExpirationDate())
                 .setId(this.getId())
-                .setFrontCanisterImage(this.getFrontCanisterImage())
+                .setFrontCanisterImageName(this.getFrontCanisterImageName())
                 .setCompanyId(this.getCompanyId())
                 .setLotNumber(this.getLotNumber())
                 .setName(this.getName())

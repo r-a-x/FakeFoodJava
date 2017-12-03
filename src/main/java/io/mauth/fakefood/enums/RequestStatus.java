@@ -7,5 +7,5 @@ public enum RequestStatus {
     SUBMITTED,
     PENDING,
     FAKE,
-    ORIGINAL
+    FAILED, ORIGINAL
 }

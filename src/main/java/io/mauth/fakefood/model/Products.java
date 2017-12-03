@@ -21,9 +21,6 @@ public class Products {
     @Column(name = "name")
     private String name;
 
-
-//    This is not being used
-
     @Column(name = "company_id")
     private Long companyId;
 
