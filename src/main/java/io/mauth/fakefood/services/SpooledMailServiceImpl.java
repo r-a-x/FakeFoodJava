@@ -76,6 +76,7 @@ public class SpooledMailServiceImpl implements SpooledMailService {
             params.put("lotNumber",audit.getLotNumber());
             params.put("expirationCode",audit.getExpirationDate().toString());
             params.put("barCode",audit.getBarCode());
+            params.put("androidId",audit.getAndroidId());
 
             String text = VelocityEngineUtils.mergeTemplateIntoString(
                     this.velocityEngine,

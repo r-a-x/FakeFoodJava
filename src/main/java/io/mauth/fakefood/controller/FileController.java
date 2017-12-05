@@ -24,4 +24,6 @@ public class FileController {
     public FilePathDto postFile(@RequestParam("logoImage")MultipartFile multipartFile) throws IOException {
             return fileService.uploadFile(multipartFile);
     }
+
+//    @RequestMapping(value = "/file/")
 }

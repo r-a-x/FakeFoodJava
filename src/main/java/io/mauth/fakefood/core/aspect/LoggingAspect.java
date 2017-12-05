@@ -26,9 +26,9 @@ import java.util.List;
 @Order(0)
 public class LoggingAspect implements FakeFoodAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger("com.endurance.calico.site.core.aop.annotation.Loggable");
+    private static final Logger logger = LoggerFactory.getLogger("io.mauth.fakefood.core.annotation.Loggable");
 
-    @AfterThrowing(pointcut = "(execution(* *.*(..)) && @annotation(com.endurance.calico.site.core.aop.annotation.Loggable)) || (@within(com.endurance.calico.site.core.aop.annotation.Loggable))", throwing = "ex")
+    @AfterThrowing(pointcut = "(execution(* *.*(..)) && @annotation(io.mauth.fakefood.core.annotation.Loggable)) || (@within(io.mauth.fakefood.core.annotation.Loggable))", throwing = "ex")
     public void logErrors(final JoinPoint joinPoint, Throwable ex) throws Throwable {
         performLoggingAfterThrowing(joinPoint, ex);
     }

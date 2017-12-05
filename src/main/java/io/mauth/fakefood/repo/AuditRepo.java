@@ -16,4 +16,6 @@ public interface AuditRepo extends JpaRepository<Audit,Long>{
     List<Audit> findByAndroidId(String androidId);
 
     List<Audit> findByStatus(RequestStatus status);
+
+    Audit findByAndroidIdAndCompanyId(String androidId, Long companyId);
 }
