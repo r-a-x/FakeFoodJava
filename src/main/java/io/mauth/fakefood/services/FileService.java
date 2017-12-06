@@ -6,14 +6,13 @@ import io.mauth.fakefood.util.Utility;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Created by rahulb on 3/12/17.
@@ -28,7 +27,7 @@ public class FileService  {
     @Value("${file.location}")
     private String dir;
 
-    public FilePathDto uploadFile(MultipartFile multipartFile) throws IOException {
+    private String saveFile(MultipartFile multipartFile) throws IOException {
         String fileName = Utility.getRandomName();
         String filePath = dir+'/' + fileName ;
         File file = new File(filePath);
@@ -41,8 +40,26 @@ public class FileService  {
         savedFile.setPath(filePath);
 
         fileRepo.save(savedFile);
-
-        return new FilePathDto(fileName);
+        return fileName;
+    }
+    public FilePathDto uploadFile(MultipartFile logoMultipartFile, MultipartFile backMultiPartFile, MultipartFile frontMultipartFile) throws IOException {
+        String logoImageName = saveFile(logoMultipartFile);
+        String backImageName = saveFile(backMultiPartFile);
+        String frontImageName = saveFile(frontMultipartFile);
+        FilePathDto filePathDto = new FilePathDto();
+        filePathDto.setBackImageName(backImageName);
+        filePathDto.setFrontImageName(frontImageName);
+        filePathDto.setLogoImageName(logoImageName);
+        return filePathDto;
     }
 
+    public ResponseEntity<byte[]> getFile(String fileName) throws IOException {
+        io.mauth.fakefood.model.File file = fileRepo.findByName(fileName);
+        if ( file == null)
+            throw new FileNotFoundException();
+        File systemFile = new File(file.getPath());
+        byte[] filebytes = org.apache.commons.io.FileUtils.readFileToByteArray(systemFile);
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(filebytes);
+
+    }
 }
