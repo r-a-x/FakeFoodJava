@@ -21,7 +21,7 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @RequestMapping(value = "/file/logo",method = RequestMethod.POST)
+    @RequestMapping(value = "/file",method = RequestMethod.POST)
     public FilePathDto postFile(@RequestParam("logoImage")MultipartFile logoMultipartFile,
                                 @RequestParam("backImage")MultipartFile backMultiPartFile,
                                 @RequestParam("frontImage")MultipartFile frontMultiFile) throws IOException {
