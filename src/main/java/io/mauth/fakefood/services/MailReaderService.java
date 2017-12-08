@@ -99,7 +99,8 @@ public class MailReaderService {
 
             String text = getTextFromMessage(msg);
             String androidId = getAndroidId(text);
-
+            if ( androidId == null)
+                continue;
             String companyMail = sendersName(msg);
             Company company = companyRepo.findByEmail(companyMail);
 
@@ -125,6 +126,8 @@ public class MailReaderService {
     private String getAndroidId(String text){
         int s = text.indexOf("androidId:-");
         int l = text.lastIndexOf("!");
+        if ( s==- 1 )
+            return null;
         return text.substring(s+"androidId:-".length(),l);
     }
 
