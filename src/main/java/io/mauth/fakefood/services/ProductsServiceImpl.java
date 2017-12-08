@@ -1,5 +1,6 @@
 package io.mauth.fakefood.services;
 
+import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.dto.ProductDto;
 import io.mauth.fakefood.model.*;
 import io.mauth.fakefood.repo.*;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Loggable
 public class ProductsServiceImpl implements ProductsService{
 
     @Autowired

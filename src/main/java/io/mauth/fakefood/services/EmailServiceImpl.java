@@ -1,5 +1,6 @@
 package io.mauth.fakefood.services;
 
+import io.mauth.fakefood.core.annotation.Loggable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,6 +16,7 @@ import java.io.File;
  * Created by rahulb on 1/12/17.
  */
 @Service
+@Loggable
 public class EmailServiceImpl  implements EmailService{
 
     @Autowired

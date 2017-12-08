@@ -1,5 +1,6 @@
 package io.mauth.fakefood.services;
 
+import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.dto.FilePathDto;
 import io.mauth.fakefood.repo.FileRepo;
 import io.mauth.fakefood.util.Utility;
@@ -19,6 +20,7 @@ import java.io.*;
  */
 @Service
 @Transactional
+@Loggable
 public class FileService  {
 
     @Autowired
@@ -30,7 +32,14 @@ public class FileService  {
     private String saveFile(MultipartFile multipartFile) throws IOException {
         String fileName = Utility.getRandomName();
         String filePath = dir+'/' + fileName ;
-        File file = new File(filePath);
+        File file = new  File(filePath);
+        if (file.createNewFile()){
+            System.out.print("File created");
+
+        }else{
+            throw new FileNotFoundException("Unable to create File");
+        }
+
         OutputStream outputStream = new FileOutputStream(file);
         outputStream.write(multipartFile.getBytes());
         IOUtils.closeQuietly(outputStream);
@@ -41,6 +50,7 @@ public class FileService  {
 
         fileRepo.save(savedFile);
         return fileName;
+
     }
     public FilePathDto uploadFile(MultipartFile logoMultipartFile, MultipartFile backMultiPartFile, MultipartFile frontMultipartFile) throws IOException {
         String logoImageName = saveFile(logoMultipartFile);

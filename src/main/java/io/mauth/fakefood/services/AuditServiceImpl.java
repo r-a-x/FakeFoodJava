@@ -1,5 +1,6 @@
 package io.mauth.fakefood.services;
 
+import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.dto.AuditDto;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Service
 @Transactional
+@Loggable
 public class AuditServiceImpl implements AuditService {
     @Autowired
     private AuditRepo auditRepo;

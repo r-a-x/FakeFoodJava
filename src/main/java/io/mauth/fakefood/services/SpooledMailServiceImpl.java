@@ -1,5 +1,6 @@
 package io.mauth.fakefood.services;
 
+import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
 import io.mauth.fakefood.model.Company;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 @Service("spooledMailService")
 @Transactional
+@Loggable
 public class SpooledMailServiceImpl implements SpooledMailService {
 
     @Autowired
