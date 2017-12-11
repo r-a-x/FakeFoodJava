@@ -67,26 +67,29 @@ public class ProductsServiceImpl implements ProductsService{
         for (int i=0;i<productsList.size();i++){
 
             Products products = productsList.get(i);
-            ProductDto productDto = new ProductDto(products);
+//            ProductDto productDto = new ProductDto(products);
 
             List<ProductsFlavoursMapping> productsFlavoursMappingList = productsFlavoursMappingRepo.findByProductId(products.getId());
             List<String> flavoursList = new ArrayList<>();
             for (int j=0;j<productsFlavoursMappingList.size();j++)
                 flavoursList.add(productsFlavoursMappingList.get(j).getFlavour());
 
-            productDto.setFlavours(flavoursList);
+//            productDto.setFlavours(flavoursList);
 
             List<ProductsSizesMapping> productsSizesMappingList = productsSizeMappingRepo.findByProductId(products.getId());
             List<String> sizeList = new ArrayList<>();
             for (int j=0;j<productsSizesMappingList.size();j++)
                 sizeList.add(productsSizesMappingList.get(j).getSize());
 
-            productDto.setSizes(sizeList);
+//            productDto.setSizes(sizeList);
 
             List<ProductCompanyMapping > productCompanyMappingList = productCompanyMappingRepo.findByProductId(products.getId());
 
             for( int j=0;j<productCompanyMappingList.size();j++){
                 Company company = companyRepo.findById(productCompanyMappingList.get(j).getCompanyId());
+                ProductDto productDto = new ProductDto(products);
+                productDto.setSizes(sizeList);
+                productDto.setFlavours(flavoursList);
                 productDto.setCompanyName(company.getName());
                 productDto.setImage(productCompanyMappingList.get(j).getImage());
                 productDto.setName(productCompanyMappingList.get(j).getName());
