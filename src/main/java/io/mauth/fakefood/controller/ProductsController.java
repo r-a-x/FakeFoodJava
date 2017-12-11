@@ -35,7 +35,6 @@ public class ProductsController {
     public List<ProductDto> getProducts(){
         return productsService.getProducts();
     }
-
 }
 /*
 *   How should I go about using the various things, Should I use database etc ?

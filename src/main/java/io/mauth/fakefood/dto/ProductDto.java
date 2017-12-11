@@ -19,6 +19,7 @@ public class ProductDto implements Serializable {
     private Double price;
     private Currency currency;
     private String companyName;
+    private Long companyId;
     private FoodType foodType;
     private String description;
     private String image;
@@ -131,6 +132,15 @@ public class ProductDto implements Serializable {
 
     public ProductDto setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public ProductDto setCompanyId(Long companyId) {
+        this.companyId = companyId;
         return this;
     }
 }

@@ -91,6 +91,7 @@ public class ProductsServiceImpl implements ProductsService{
                 productDto.setSizes(sizeList);
                 productDto.setFlavours(flavoursList);
                 productDto.setCompanyName(company.getName());
+                productDto.setCompanyId(company.getId());
                 productDto.setImage(productCompanyMappingList.get(j).getImage());
                 productDto.setName(productCompanyMappingList.get(j).getName());
                 productDtos.add(productDto);
