@@ -3,6 +3,10 @@ insert into flavours (flavour,created_on,modified_on) values('Extreme Milk Choco
 insert into flavours (flavour,created_on,modified_on) values('Chocolate Peanut Butter',now(),now());
 insert into flavours (flavour,created_on,modified_on) values('Mocha Cappuccino',now(),now());
 insert into flavours (flavour,created_on,modified_on) values('Cinnamon Graham Cracker',now(),now());
+insert into flavours (flavour,created_on,modified_on) values('Strawberry',now(),now());
+insert into flavours (flavour,created_on,modified_on) values('Cookie n Cream',now(),now());
+insert into flavours (flavour,created_on,modified_on) values('Vanilla',now(),now());
+insert into flavours (flavour,created_on,modified_on) values('Choclate Peanut Butter',now(),now());
 
 insert into products (flavours,type,description,food_type,created_on,modified_on) values ('','Whey Protein','A fast digestive protein with double choclate flavour','VEG' ,now(),now());
 
@@ -12,9 +16,24 @@ insert into product_flavours_mapping (flavour,product_id,created_on,modified_on)
 insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Mocha Cappuccino',1,now(),now());
 insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Cinnamon Graham Cracker',1,now(),now());
 
+
+insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Strawberry',1,now(),now());
+insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Cookie n Cream',1,now(),now());
+insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Vanilla',1,now(),now());
+insert into product_flavours_mapping (flavour,product_id,created_on,modified_on) values ('Choclate Peanut Butter',1,now(),now());
+
+
+
 insert into company (name,email,created_on,modified_on ) values ( 'Optimum Nutrition (ON)','Consumer@optimumnutrition.com',now(),now());
 
+insert into company (name,email,created_on,modified_on) values ( 'MuscleTech ','counterfeits@iovate.com',now(),now());
 
+
+insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 1,1,now(),now() );
+insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 2,1,now(),now() );
+insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 3,1,now(),now() );
+insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 4,1,now(),now() );
+insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 5,1,now(),now() );
 
 insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 1,1,now(),now() );
 insert into product_company_mapping (product_id,company_id,created_on,modified_on) values ( 2,1,now(),now() );
@@ -149,3 +168,7 @@ update product_sizes_mapping set unit='lbs' ;
 //        flavourList.add( new Flavour("Rocky Road"));
 //        flavourList.add( new Flavour("Vanilla Ice Cream"));
 //        flavourList.add( new Flavour("White Chocolate"));
+
+
+
+
