@@ -89,6 +89,7 @@ public class ProductsServiceImpl implements ProductsService{
                 Company company = companyRepo.findById(productCompanyMappingList.get(j).getCompanyId());
                 productDto.setCompanyName(company.getName());
                 productDto.setImage(productCompanyMappingList.get(j).getImage());
+                productDto.setName(productCompanyMappingList.get(j).getName());
                 productDtos.add(productDto);
             }
 

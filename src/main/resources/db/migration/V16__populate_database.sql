@@ -32,3 +32,9 @@ insert into product_sizes_mapping (size,product_id,created_on,modified_on,unit) 
 insert into product_sizes_mapping (size,product_id,created_on,modified_on,unit) values ('3.31',1,now(),now(),'lbs');
 insert into product_sizes_mapping (size,product_id,created_on,modified_on,unit) values ('5',1,now(),now(),'lbs');
 insert into product_sizes_mapping (size,product_id,created_on,modified_on,unit) values ('8',1,now(),now(),'lbs');
+
+insert into file_request (name,path,created_on,modified_on) values('muscletech','/root/FakeFoodFiles/muscletech',now(),now());
+insert into file_request (name,path,created_on,modified_on) values('optimum','/root/FakeFoodFiles/optimum',now(),now());
+
+insert into product_company_mapping (product_id,company_id,created_on,modified_on,image,name) values ( 1,1,now(),now(),'optimum','Optimum Nutrition (ON) 100% Whey Gold Standard ');
+insert into product_company_mapping (product_id,company_id,created_on,modified_on,image,name) values ( 1,2,now(),now(),'muscletech','Muscletech Nitrotech Whey Gold');

@@ -26,13 +26,17 @@ public class ProductCompanyMapping {
     @Column(name = "image")
     private String image;
 
+    @Column(name="name")
+    private String name;
+
     public ProductCompanyMapping() {
     }
 
-    public ProductCompanyMapping(Long productId, Long companyId, String image) {
+    public ProductCompanyMapping(Long productId, Long companyId, String image,String name) {
         this.productId = productId;
         this.companyId = companyId;
         this.image = image;
+        this.name = name;
     }
 
     public String getImage() {
@@ -65,5 +69,13 @@ public class ProductCompanyMapping {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
