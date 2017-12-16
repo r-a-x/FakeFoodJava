@@ -13,4 +13,5 @@ public interface ProductCompanyMappingRepo extends JpaRepository<ProductCompanyM
 
     List<ProductCompanyMapping> findByProductId(Long id);
 
+    ProductCompanyMapping findByProductIdAndCompanyId(Long productId,Long companyId);
 }

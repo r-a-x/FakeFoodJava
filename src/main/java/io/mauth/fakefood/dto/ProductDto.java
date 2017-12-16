@@ -13,6 +13,7 @@ import java.util.List;
 public class ProductDto implements Serializable {
 
     private String name;
+    private Long id;
     private List<String> flavours;
     private List<String> sizes;
     private String product;
@@ -142,5 +143,13 @@ public class ProductDto implements Serializable {
     public ProductDto setCompanyId(Long companyId) {
         this.companyId = companyId;
         return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

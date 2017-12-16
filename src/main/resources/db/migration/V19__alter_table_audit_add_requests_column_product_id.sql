@@ -1,0 +1,1 @@
+alter TABLE audit_requests add COLUMN product_id bigserial;

@@ -13,4 +13,5 @@ public interface FlavourRepo extends JpaRepository<Flavours,Long> {
     List<Flavours> findAll();
     Flavours findById(Long id);
 
+    Flavours findByFlavour(String flavour);
 }

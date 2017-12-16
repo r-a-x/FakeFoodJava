@@ -33,6 +33,9 @@ public class Audit implements Serializable{
     @Column(name = "name")
     private String name;
 
+    @Column(name = "product_id")
+    private Long productId;
+
     @Column(name = "company_id")
     private Long companyId;
 
@@ -71,11 +74,11 @@ public class Audit implements Serializable{
 
     public Audit() {
     }
-
-    public Audit(String androidId, RequestStatus status, String name, Long companyId, String size, String flavour, PurchasePlaceEnum purchasePlaceEnum, String placeOfPurchase, String lotNumber, Date expirationDate, String barCode, String frontCanisterImageName, String backCanisterImageName, String logoImageName) {
+    public Audit(String androidId, RequestStatus status, String name, Long companyId, Long productId, String size, String flavour, PurchasePlaceEnum purchasePlaceEnum, String placeOfPurchase, String lotNumber, Date expirationDate, String barCode, String frontImageName, String backImageName, String logoImageName) {
         this.androidId = androidId;
         this.status = status;
         this.name = name;
+        this.productId = productId;
         this.companyId = companyId;
         this.size = size;
         this.flavour = flavour;
@@ -84,8 +87,8 @@ public class Audit implements Serializable{
         this.lotNumber = lotNumber;
         this.expirationDate = expirationDate;
         this.barCode = barCode;
-        this.frontCanisterImageName = frontCanisterImageName;
-        this.backCanisterImageName = backCanisterImageName;
+        this.frontCanisterImageName = frontImageName;
+        this.backCanisterImageName = backImageName;
         this.logoImageName = logoImageName;
     }
 
@@ -226,5 +229,13 @@ public class Audit implements Serializable{
                 .setPlaceOfPurchase(this.getPlaceOfPurchase())
                 .setSize(this.getSize());
 
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

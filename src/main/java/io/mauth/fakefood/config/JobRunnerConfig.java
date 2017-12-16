@@ -23,7 +23,7 @@ public class JobRunnerConfig {
     @Autowired
     private MailReaderService mailReaderService;
 
-    @Scheduled(fixedRate = 1000)
+//    @Scheduled(fixedRate = 1000)
     public void sendUnsentMails(){
         spooledMailService.sendUnsentMails();
     }

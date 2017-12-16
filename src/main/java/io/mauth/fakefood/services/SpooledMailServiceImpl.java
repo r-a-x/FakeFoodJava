@@ -4,11 +4,8 @@ import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
 import io.mauth.fakefood.model.Company;
-import io.mauth.fakefood.model.Flavours;
-import io.mauth.fakefood.repo.AuditRepo;
-import io.mauth.fakefood.repo.CompanyRepo;
-import io.mauth.fakefood.repo.FileRepo;
-import io.mauth.fakefood.repo.FlavourRepo;
+import io.mauth.fakefood.model.ProductCompanyMapping;
+import io.mauth.fakefood.repo.*;
 import io.mauth.fakefood.util.Constants;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.velocity.app.VelocityEngine;
@@ -43,6 +40,9 @@ public class SpooledMailServiceImpl implements SpooledMailService {
     @Autowired
     private FlavourRepo flavourRepo;
 
+    @Autowired
+    private ProductCompanyMappingRepo productCompanyMappingRepo;
+
     @Override
     public List<Audit> getUnsentMails() {
         return auditRepo.findByStatus(RequestStatus.PENDING);
@@ -68,17 +68,19 @@ public class SpooledMailServiceImpl implements SpooledMailService {
                     "UTF-8",
                     mp);
 
+//          The name for the product will be retrieved from this place, and it will be used to do some thing special
+            ProductCompanyMapping productCompanyMapping = productCompanyMappingRepo.findByProductIdAndCompanyId(audit.getProductId(),audit.getCompanyId());
             Map<String,Object> params = new HashedMap();
-            params.put("name",audit.getName());
+            params.put("name",productCompanyMapping.getName());
             params.put("company",company.getName());
             params.put("size",audit.getSize());
-            Flavours flavours = flavourRepo.findById( Long.valueOf(audit.getFlavour()));
-            params.put("flavour",flavours.getFlavour() );
+//            Flavours flavours = flavourRepo.findByFlavour( audit.getFlavour());
+            params.put("flavour",audit.getFlavour());
             params.put("placeOfPurchase",audit.getPlaceOfPurchase());
             params.put("lotNumber",audit.getLotNumber());
             params.put("expirationCode",audit.getExpirationDate().toString());
             params.put("barCode",audit.getBarCode());
-            params.put("androidId",audit.getAndroidId());
+            params.put("androidId",getMailId(audit));
 
             String text = VelocityEngineUtils.mergeTemplateIntoString(
                     this.velocityEngine,
@@ -110,5 +112,9 @@ public class SpooledMailServiceImpl implements SpooledMailService {
     public void sendUnsentMails() {
         List<Audit> unsentMails = getUnsentMails();
         unsentMails.forEach(this::sendSpooledMail);
+    }
+
+    private String getMailId(Audit audit){
+        return audit.getAndroidId()+":"+audit.getId();
     }
 }

@@ -20,6 +20,7 @@ public class AuditDto implements Serializable{
     private String androidId;
     private RequestStatus status;
     private String name;
+    private Long productId;
     private Long companyId;
     private String company;
     private String size;
@@ -204,6 +205,7 @@ public class AuditDto implements Serializable{
                 this.status,
                 this.name,
                 this.companyId,
+                this.productId,
                 this.size,
                 this.flavour,
                 this.purchasePlaceEnum,
@@ -214,5 +216,13 @@ public class AuditDto implements Serializable{
                 this.frontImageName,
                 this.backImageName,
                 this.logoImageName);
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

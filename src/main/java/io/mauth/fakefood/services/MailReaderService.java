@@ -74,10 +74,12 @@ public class MailReaderService {
 //  that decision need to be taken. If the message
 
     private Boolean isOriginal(String text){
+        text = text.substring(0,text.lastIndexOf("Hey,"));
         return text.toLowerCase().contains("original") || text.toLowerCase().contains("authentic");
     }
 
     private Boolean isFake(String text){
+        text = text.substring(0,text.lastIndexOf("Hey,"));
         return text.toLowerCase().contains("fake") || text.toLowerCase().contains("duplicate") || text.contains("unauthentic");
     }
 
@@ -90,7 +92,7 @@ public class MailReaderService {
         Store store = session.getStore("imaps");
         store.connect(host,user,pass);
         Folder inbox = store.getFolder("inbox");
-        inbox.open(Folder.READ_ONLY);
+        inbox.open(Folder.READ_WRITE);
 
         Message[] messages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN),false));
 
@@ -98,18 +100,22 @@ public class MailReaderService {
         for( Message msg : messages){
 
             String text = getTextFromMessage(msg);
-            String androidId = getAndroidId(text);
-            if ( androidId == null)
+            String mailId = getMailId(text);
+            if ( mailId == null) {
+                msg.setFlag(Flags.Flag.SEEN,true);
                 continue;
+            }
+            String androidId = getAndroidIdFromMailId(mailId);
             String companyMail = sendersName(msg);
+            Long auditId = getAuditIdFromMailId(mailId);
             Company company = companyRepo.findByEmail(companyMail);
 
-            Audit audit =  auditRepo.findByAndroidIdAndCompanyId(androidId,company.getId());
+            Audit audit =  auditRepo.findByAndroidIdAndCompanyIdAndId(androidId,company.getId(),auditId);
 
-            if ( isFake(text)) {
+            if ( isFake(getTextFromMessage(msg))) {
                     audit.setStatus(RequestStatus.FAKE);
             }
-            else if ( isOriginal(text)){
+            else if ( isOriginal(getTextFromMessage(msg))){
                     audit.setStatus(RequestStatus.ORIGINAL);
             }
             else{
@@ -123,7 +129,7 @@ public class MailReaderService {
 
     }
 
-    private String getAndroidId(String text){
+    private String getMailId(String text){
         int s = text.indexOf("androidId:-");
         int l = text.lastIndexOf("!");
         if ( s==- 1 )
@@ -134,6 +140,15 @@ public class MailReaderService {
     private String sendersName(Message message) throws MessagingException {
         Address[] address = message.getFrom();
         String info= address[0].toString();
-        return info.substring( info.indexOf("<"),info.indexOf(">") );
+        return info.substring( info.indexOf("<")+1,info.indexOf(">") );
+    }
+
+    private String getAndroidIdFromMailId(String mailId){
+        return mailId.substring(0,mailId.lastIndexOf(":"));
+    }
+    private Long getAuditIdFromMailId(String mailId){
+        int mailIdidx = mailId.lastIndexOf(":");
+        return Long.valueOf(mailId.substring(mailIdidx+1,mailId.length()));
+
     }
 }

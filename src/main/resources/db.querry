@@ -172,3 +172,4 @@ update product_sizes_mapping set unit='lbs' ;
 
 
 
+// Fix the name of the whey protein etc in it, that should work etc for you 

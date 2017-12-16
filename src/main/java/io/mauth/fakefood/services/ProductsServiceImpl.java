@@ -66,28 +66,29 @@ public class ProductsServiceImpl implements ProductsService{
         List<Products> productsList = productRepo.findAll();
         for (int i=0;i<productsList.size();i++){
 
-            Products products = productsList.get(i);
-//            ProductDto productDto = new ProductDto(products);
+            Products product = productsList.get(i);
+//            ProductDto productDto = new ProductDto(product);
 
-            List<ProductsFlavoursMapping> productsFlavoursMappingList = productsFlavoursMappingRepo.findByProductId(products.getId());
+            List<ProductsFlavoursMapping> productsFlavoursMappingList = productsFlavoursMappingRepo.findByProductId(product.getId());
             List<String> flavoursList = new ArrayList<>();
             for (int j=0;j<productsFlavoursMappingList.size();j++)
                 flavoursList.add(productsFlavoursMappingList.get(j).getFlavour());
 
 //            productDto.setFlavours(flavoursList);
 
-            List<ProductsSizesMapping> productsSizesMappingList = productsSizeMappingRepo.findByProductId(products.getId());
+            List<ProductsSizesMapping> productsSizesMappingList = productsSizeMappingRepo.findByProductId(product.getId());
             List<String> sizeList = new ArrayList<>();
             for (int j=0;j<productsSizesMappingList.size();j++)
                 sizeList.add(productsSizesMappingList.get(j).getSize());
 
 //            productDto.setSizes(sizeList);
 
-            List<ProductCompanyMapping > productCompanyMappingList = productCompanyMappingRepo.findByProductId(products.getId());
+            List<ProductCompanyMapping > productCompanyMappingList = productCompanyMappingRepo.findByProductId(product.getId());
 
             for( int j=0;j<productCompanyMappingList.size();j++){
                 Company company = companyRepo.findById(productCompanyMappingList.get(j).getCompanyId());
-                ProductDto productDto = new ProductDto(products);
+                ProductDto productDto = new ProductDto(product);
+                productDto.setId(product.getId());
                 productDto.setSizes(sizeList);
                 productDto.setFlavours(flavoursList);
                 productDto.setCompanyName(company.getName());
