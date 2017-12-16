@@ -32,8 +32,8 @@ public class AuditDto implements Serializable{
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date expirationDate;
     private String barCode;
-    private String frontCanisterImageName;
-    private String backCanisterImageName;
+    private String frontImageName;
+    private String backImageName;
     private String logoImageName;
 
     public AuditDto() {
@@ -172,21 +172,21 @@ public class AuditDto implements Serializable{
         return this;
     }
 
-    public String getFrontCanisterImageName() {
-        return frontCanisterImageName;
+    public String getFrontImageName() {
+        return frontImageName;
     }
 
-    public AuditDto setFrontCanisterImageName(String frontCanisterImageName) {
-        this.frontCanisterImageName = frontCanisterImageName;
+    public AuditDto setFrontImageName(String frontImageName) {
+        this.frontImageName = frontImageName;
         return this;
     }
 
-    public String getBackCanisterImageName() {
-        return backCanisterImageName;
+    public String getBackImageName() {
+        return backImageName;
     }
 
-    public AuditDto setBackCanisterImageName(String backCanisterImageName) {
-        this.backCanisterImageName = backCanisterImageName;
+    public AuditDto setBackImageName(String backImageName) {
+        this.backImageName = backImageName;
         return this;
     }
 
@@ -211,8 +211,8 @@ public class AuditDto implements Serializable{
                 this.lotNumber,
                 this.expirationDate,
                 this.barCode,
-                this.frontCanisterImageName,
-                this.backCanisterImageName,
+                this.frontImageName,
+                this.backImageName,
                 this.logoImageName);
     }
 }
