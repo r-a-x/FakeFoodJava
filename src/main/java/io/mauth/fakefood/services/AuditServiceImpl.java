@@ -64,11 +64,6 @@ public class AuditServiceImpl implements AuditService {
         Audit audit = auditDto.toAudit();
         audit.setStatus(RequestStatus.PENDING);
         auditRepo.save(audit);
-
-
-
-//        spooledMailService.sendUnsentMails();
-
         return auditDto;
     }
 
