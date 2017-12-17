@@ -213,6 +213,7 @@ public class Audit implements Serializable{
     }
 
     public AuditDto toAuditDto(){
+
         return new AuditDto()
                 .setStatus(this.getStatus())
                 .setAndroidId(this.getAndroidId())

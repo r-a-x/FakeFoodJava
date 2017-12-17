@@ -4,7 +4,9 @@ import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.dto.AuditDto;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
+import io.mauth.fakefood.model.Company;
 import io.mauth.fakefood.repo.AuditRepo;
+import io.mauth.fakefood.repo.CompanyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,9 @@ public class AuditServiceImpl implements AuditService {
     private AuditRepo auditRepo;
 
     @Autowired
+    private CompanyRepo companyRepo;
+
+    @Autowired
     private SpooledMailService spooledMailService;
 
     @Override
@@ -34,6 +39,9 @@ public class AuditServiceImpl implements AuditService {
 
         for (int i=0;i<audits.size();i++){
             Audit audit = audits.get(i);
+            AuditDto auditDto = audit.toAuditDto();
+            Company company = companyRepo.findById(audit.getCompanyId());
+            auditDto.setCompany(company.getName());
             auditDtos.add( audit.toAuditDto() );
         }
 
