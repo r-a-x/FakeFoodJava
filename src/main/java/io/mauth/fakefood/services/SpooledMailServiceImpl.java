@@ -57,7 +57,6 @@ public class SpooledMailServiceImpl implements SpooledMailService {
 
         Company company = companyRepo.findById(audit.getCompanyId());
         String to = company.getEmail();
-        to="bansal.rahul14@gmail.com";
         try {
 
             Map<String,Object> mp = new HashedMap();

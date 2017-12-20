@@ -3,6 +3,7 @@ package io.mauth.fakefood.services;
 import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.dto.AuditDto;
 import io.mauth.fakefood.enums.RequestStatus;
+import io.mauth.fakefood.exception.AuditExistException;
 import io.mauth.fakefood.model.Audit;
 import io.mauth.fakefood.model.Company;
 import io.mauth.fakefood.model.ProductCompanyMapping;
@@ -61,6 +62,9 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public AuditDto createAudit(AuditDto auditDto) {
 
+        Audit auditDB = auditRepo.findByBarCode(auditDto.getBarCode());
+        if ( auditDB != null)
+            throw new AuditExistException("The Audit exist with this barcode");
         Audit audit = auditDto.toAudit();
         audit.setStatus(RequestStatus.PENDING);
         auditRepo.save(audit);

@@ -1,5 +1,6 @@
 package io.mauth.fakefood.config;
 
+import io.mauth.fakefood.services.MailReaderService;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -17,52 +19,22 @@ import java.util.Properties;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-
-    @Value("${smtp.pass}")
-    private String smtpPass;
-
-    @Value("${smtp.port}")
-    private int smtpPort;
-
-    @Value("${smtp.host}")
-    private String smtpHost;
-
-    @Value("${smtp.useSsl}")
-    private String smtpUseSsl;
-
-    @Value("${smtp.user}")
-    private String smtpUser;
-
-    @Value("${smtp.from}")
-    private String smtpFrom;
-
-    @Value("${smtp.to}")
-    private String smtpTo;
-
-    @Value("${smtp.subject}")
-    private String smtpSubject;
-
     @Value("${smtp.debug}")
     private String debug;
 
 
     @Bean
-    public JavaMailSender getJavaMailSender() {
+    public JavaMailSender getJavaMailSender() throws IOException {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost(smtpHost);
-        mailSender.setPort(smtpPort);
-
-        mailSender.setUsername(smtpUser);
-        mailSender.setPassword(smtpPass);
+        Properties properties = new Properties();
+        properties.load(MailReaderService.class.getClassLoader().getResourceAsStream("readmail.properties"));
+        mailSender.setUsername(properties.getProperty("mail.smtp.user"));
+        mailSender.setPassword(properties.getProperty("mail.smtp.pass"));
 
         Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", debug);
-        props.put("mail.isSSL","true");
+        props.load(MailReaderService.class.getClassLoader().getResourceAsStream("readmail.properties"));
         return mailSender;
     }
 

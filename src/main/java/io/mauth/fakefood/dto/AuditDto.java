@@ -6,6 +6,7 @@ import io.mauth.fakefood.enums.PurchasePlaceEnum;
 import io.mauth.fakefood.enums.RequestStatus;
 import io.mauth.fakefood.model.Audit;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,24 +18,40 @@ public class AuditDto implements Serializable{
 
     private Long id; // It will be stored in the local db, just tells the request made by the user
     private Long dbId;  // In the server DB
+    @NotNull
     private String androidId;
+    @NotNull
     private RequestStatus status;
+    @NotNull
     private String name;
+    @NotNull
     private Long productId;
+    @NotNull
     private Long companyId;
+    @NotNull
     private String company;
+    @NotNull
     private String size;
+    @NotNull
     private String flavour;
+    @NotNull
     private PurchasePlaceEnum purchasePlaceEnum;
+    @NotNull
     private String placeOfPurchase;
+    @NotNull
     private String lotNumber;
+    @NotNull
     private FoodType foodType;
-
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @NotNull
     private Date expirationDate;
+    @NotNull
     private String barCode;
+    @NotNull
     private String frontImageName;
+    @NotNull
     private String backImageName;
+    @NotNull
     private String logoImageName;
 
     public AuditDto() {

@@ -7,14 +7,11 @@ import io.mauth.fakefood.model.Company;
 import io.mauth.fakefood.repo.AuditRepo;
 import io.mauth.fakefood.repo.CompanyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.search.FlagTerm;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -31,14 +28,14 @@ public class MailReaderService {
     @Autowired
     private CompanyRepo companyRepo;
 
-    @Value("${smtp.pass}")
-    private String pass;
-
-    @Value("${smtp.user}")
-    private String user;
-
-    @Value("${imap.host}")
-    private String host;
+//    @Value("${smtp.pass}")
+//    private String pass;
+//
+//    @Value("${smtp.user}")
+//    private String user;
+//
+//    @Value("${imap.host}")
+//    private String host;
 
     private static String getTextFromMessage(Message message) throws MessagingException, IOException {
         String result = "";
@@ -87,10 +84,14 @@ public class MailReaderService {
     public void processEmails() throws IOException, MessagingException {
 
         Properties properties = new Properties();
-        properties.load(new FileInputStream(new File(System.getProperty("user.dir")+"/"+ "src/main/resources/readmail.properties")));
-        Session session = Session.getDefaultInstance(properties,null);
+        properties.load(MailReaderService.class.getClassLoader().getResourceAsStream("readmail.properties"));
+        Session session = Session.getDefaultInstance(
+                properties
+        );
         Store store = session.getStore("imaps");
-        store.connect(host,user,pass);
+        store.connect(properties.getProperty("mail.imap.host"),
+                properties.getProperty("mail.smtp.user"),
+                properties.getProperty("mail.smtp.pass"));
         Folder inbox = store.getFolder("inbox");
         inbox.open(Folder.READ_WRITE);
 

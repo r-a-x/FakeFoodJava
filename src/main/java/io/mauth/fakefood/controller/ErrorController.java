@@ -1,6 +1,7 @@
 package io.mauth.fakefood.controller;
 
 import io.mauth.fakefood.dto.ErrorDto;
+import io.mauth.fakefood.exception.AuditExistException;
 import io.mauth.fakefood.exception.FileNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,6 +20,14 @@ public class ErrorController {
     @ResponseBody
     public ErrorDto processFileNotFoundException(Exception e) {
         return new ErrorDto("file_not_found", e.getMessage());
+    }
+
+
+    @ExceptionHandler(AuditExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorDto processAuditExistException(Exception e) {
+        return new ErrorDto("audit_exist", e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
