@@ -2,19 +2,19 @@ Hey,
 <br><br>
 
 I want to verify the authenticity of the whey protein.
-The details of the protein are:-
-Name :-  $name
-company :- $company
-Size :- $size
-Flavour :- $flavour
-PlaceOfPurchase :- $placeOfPurchase
-LotNumber :- $lotNumber
-ExpirationCode :- $expirationCode
-BarCode :- $barCode
-
-I am attaching the image of the box.
+<br>
+The details of the protein are:-<br>
+Name :-  $name<br>
+company :- $company<br>
+Size :- $size<br>
+Flavour :- $flavour<br>
+PlaceOfPurchase :- $placeOfPurchase  (  $link  )<br>
+LotNumber :- $lotNumber<br>
+ExpirationCode :- $expirationCode<br>
+BarCode :- $barCode<br>
+<br><br>
+I am attaching the image of the box.<br>
 Please confirm the authenticity !!
 
 <br><br>
 Thanks
-androidId:-$androidId!

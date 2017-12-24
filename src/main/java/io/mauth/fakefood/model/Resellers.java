@@ -50,4 +50,12 @@ public class Resellers {
     public void setEcom(Ecom ecom) {
         this.ecom = ecom;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
