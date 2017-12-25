@@ -41,6 +41,9 @@ public class SpooledMail {
     @Column(name = "message")
     private String message;
 
+    public SpooledMail() {
+    }
+
     public SpooledMail(Long auditId, Boolean isSent, Boolean isFailed, String failureCause, String messageId, String message) {
         this.auditId = auditId;
         this.isSent = isSent;

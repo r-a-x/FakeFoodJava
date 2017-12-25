@@ -1,7 +1,10 @@
 package io.mauth.fakefood.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.mauth.fakefood.core.annotation.Loggable;
 import io.mauth.fakefood.model.MailGunMail;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -13,6 +16,7 @@ import java.util.Map;
 /**
  * Created by rahulb on 23/12/17.
  */
+@Loggable
 public class MailRepsonseDto implements Serializable {
 //    private String domain;
 //    private String recipient;
@@ -31,8 +35,7 @@ public class MailRepsonseDto implements Serializable {
 //    private String signature;
 //    private String messageHeaders;
 //    private String conentIdMap;
-
-
+    private static Logger logger = Logger.getLogger("MailResponseDto.class");
     @JsonProperty("Content-Type")
     private String contentType;
     @JsonProperty("Message-Id")
@@ -107,10 +110,16 @@ public class MailRepsonseDto implements Serializable {
 
     public MailRepsonseDto(String mailRepsonseRaw) throws UnsupportedEncodingException {
         Map<String,String> mp = new HashMap<>();
-        String resp[]=mailRepsonseRaw.split("&");
-        for (String res :resp){
-            mp.put(res.split("=")[0], URLDecoder.decode( res.split("=") [1],"UTF-8" ));
+        try {
+            String resp[]=mailRepsonseRaw.split("&");
+            for (String res :resp){
+                if ( res.split("=").length ==2)
+                    mp.put(res.split("=")[0], URLDecoder.decode( res.split("=") [1],"UTF-8" ));
+            }
+        }catch (Exception e){
+            logger.log(Priority.ERROR,e.getMessage());
         }
+
         this.setContentType(mp.get("Content-Type"));
         this.setMessageId(mp.get("Message-Id"));
         this.setMimeVersion(mp.get("Mime-Version"));

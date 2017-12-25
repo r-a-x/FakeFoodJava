@@ -21,7 +21,7 @@ public class MailController {
 
 
     @RequestMapping(value = "/mail",method = RequestMethod.POST)
-    public void mailHook(@RequestBody() String mailRepsonseRaw) throws UnsupportedEncodingException {
+    public void mailHook(@RequestBody String mailRepsonseRaw) throws UnsupportedEncodingException {
         MailRepsonseDto mailRepsonseDto = new MailRepsonseDto(mailRepsonseRaw);
         mailReaderService.processMail(mailRepsonseDto);
     }

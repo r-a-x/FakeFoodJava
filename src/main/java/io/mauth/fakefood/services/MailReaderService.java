@@ -9,6 +9,8 @@ import io.mauth.fakefood.model.SpooledMail;
 import io.mauth.fakefood.repo.AuditRepo;
 import io.mauth.fakefood.repo.MailGunMailRepo;
 import io.mauth.fakefood.repo.SpooledMailsRepo;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,13 +35,16 @@ public class MailReaderService {
     @Autowired
     private MailGunMailRepo mailGunMailRepo;
 
+    private Logger logger = Logger.getLogger("MailReaderService.class");
     private Boolean isOriginal(String text){
-        text = text.substring(0,text.lastIndexOf("Hey,"));
+        if ( text == null)
+            return false;
         return text.toLowerCase().contains("original") || text.toLowerCase().contains("authentic");
     }
 
     private Boolean isFake(String text){
-        text = text.substring(0,text.lastIndexOf("Hey,"));
+        if ( text == null)
+            return false;
         return text.toLowerCase().contains("fake") || text.toLowerCase().contains("duplicate") || text.contains("unauthentic");
     }
 
@@ -81,9 +86,18 @@ public class MailReaderService {
     @Transactional
     private  void updateStatus(MailRepsonseDto mailRepsonseDto){
 
-        SpooledMail spooledMail = spooledMailsRepo.findByMessageId(mailRepsonseDto.getMessageId());
+        SpooledMail spooledMail = spooledMailsRepo.findByMessageId(mailRepsonseDto.getInReplyTo());
 
+        if ( spooledMail == null) {
+            logger.log(Priority.toPriority(Priority.WARN_INT),"The spooled Mail is the MailReaderService is not present for the id"+mailRepsonseDto.getMessageId());
+            return;
+        }
         Audit audit = auditRepo.findById(spooledMail.getAuditId());
+        if ( audit ==  null ){
+            logger.log(Priority.toPriority(Priority.WARN_INT),"The audit corresponding for the spooledMail id  "  + spooledMail.getId() + " is not present" );
+            return;
+        }
+
         if ( isFake( mailRepsonseDto.getStrippedText()))
             audit.setStatus(RequestStatus.FAKE);
         else if ( isOriginal(mailRepsonseDto.getStrippedText()))
